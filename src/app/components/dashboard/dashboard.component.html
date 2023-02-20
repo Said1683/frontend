@@ -1,0 +1,100 @@
+<!--Bar nav-->
+<header>
+  <nav class="navbar navbar-light fixed-top " style="background-color: #009092">
+      <div class="container-fluid">
+          <!--Botón menu-->
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+            <h6 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h6>    
+            <span class="navbar-toggler-icon"></span>
+            
+          </button>
+          <h6>Excel a Mysql</h6>
+          
+          <!--Contenido botón menu-->
+          <div style="width: 300px;" class="offcanvas offcanvas-start lateral" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header header-nb">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">Funcionalidades</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                
+                <div div class="d-grid gap-2">
+                  <button class="btn btn-danger" (click)="logOut()" type="button">Cerrar sesión</button>
+                </div> 
+            </div>
+        </div>
+      </div>
+  </nav>
+</header>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container mt-2 text-center col-md-4">
+  <h6>Seleccione un archivo Excel</h6>
+  <input type="file" (change)="getExcel($event)" class="form-control" multiple="false"
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+  <br>
+  <button class="btn btn-dark" (click)="sendExcel()">Cargar Archivo</button>
+</div>
+
+
+<div *ngIf="this.name" class="container mt-2 text-center">
+  <h6>Datos del Archivo</h6>
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre del archivo</th>
+          <th scope="col">Tamaño Bytes</th>
+          <th scope="col">Última modificación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ this.name }}</td>
+          <td>{{ this.size }} </td>
+          <td>{{ this.last | date:'dd/MM/yyyy hh:mma'}}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<br>
+<div  class="container mt-2 text-center">
+    <h2>Información del archivo </h2>{{ this.name }}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Punch In</th>
+            <th scope="col">Punch Out</th>
+            <th>
+              <button routerLink="/add"class="btn btn-primary btn-sm " type="button">Agregar Registro</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listProduct">
+            <td>{{ item.UserID }}</td>
+            <td>{{ item.UserName }} </td>
+            <td>{{ item.Date | date:'dd/MM/yyyy':"GMT-12"}}</td>
+            <td>{{ item.PunchIn}} </td>
+            <td>{{ item.PunchOut}}</td>
+            <td class="btn-group"> 
+              <button routerLink="/edit/{{item.id}}" class="btn btn-primary btn-sm " type="button">Editar</button>
+              <button (click)="deleteProduct(item.id!)" type="button" class="btn btn-danger btn-sm " >Eliminar
+              </button>
+            </td>
+          </tr>
+         
+        </tbody>
+      </table>
+</div>
+
+<br>
+
+

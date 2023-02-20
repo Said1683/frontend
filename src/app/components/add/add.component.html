@@ -1,0 +1,36 @@
+
+<body>
+    <div class="container-fluid col-sm-5">
+        <div class="row d-flex justify-content-center align-items-center m-1" style="height: 100vh;">
+        <div *ngIf="!loading" >
+            <h3>{{ operacion }} un nuevo registro</h3>
+            <div class="form-floating mb-3 mt-3">
+                <input type="text" [(ngModel)]="this.UserID" class="form-control" placeholder="Ingrese User ID">
+                <label>User ID</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" [(ngModel)]="this.UserName" class="form-control" placeholder="Ingrese User Name">
+                <label>User Name</label>
+            </div> 
+            <div class="form-floating mb-3">
+                <input *ngIf="this.id == 0" type="date" [(ngModel)]="this.Date" class="form-control" placeholder="Ingrese el Date">
+                <input *ngIf="this.id > 0" type="text" [(ngModel)]="this.Date"  class="form-control" placeholder="Ingrese el Date">
+                <label>Date</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="time" [(ngModel)]="this.PunchIn" class="form-control" placeholder="Ingrese Punch In">
+                <label>Punch In</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="time" [(ngModel)]="this.PunchOut" class="form-control" placeholder="Ingrese Punch Out">
+                <label>Punch Out</label>
+            </div>
+            <div class="btn-group container text-center col-sm-12">
+                <button type="button"  class="btn btn-danger btn-lg " routerLink="/dashboard">Cancelar</button>
+                <button type="button" (click)="addregistrer()" class="btn btn-secondary btn-lg ">Aceptar</button>
+            </div>
+        </div>
+        <app-spinner *ngIf="loading"></app-spinner>
+    </div>
+    </div>
+    </body>
